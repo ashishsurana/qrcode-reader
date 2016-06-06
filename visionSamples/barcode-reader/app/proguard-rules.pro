@@ -20,7 +20,7 @@
 
 -keep class com.google.android.gms.samples.vision.barcodereader.** { *; }
 -keep class com.squareup.picasso.** { *; }
--keepcla    sseswithmembers class * {
+-keep class * {
     @com.squareup.picasso.** *;
 }
 -keepclassmembers class * {
