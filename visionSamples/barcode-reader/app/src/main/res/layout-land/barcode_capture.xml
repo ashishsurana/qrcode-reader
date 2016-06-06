@@ -34,7 +34,7 @@
   <ImageView
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:id="@+id/imageView2"
+      android:id="@+id/imageView_picasso"
       android:layout_gravity="bottom"
       android:src="@drawable/images"
       />

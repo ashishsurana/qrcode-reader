@@ -15,3 +15,14 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-useuniqueclassmembernames
+-allowaccessmodification
+
+-keep class com.google.android.gms.samples.vision.barcodereader.** { *; }
+-keep class com.squareup.picasso.** { *; }
+-keepcla    sseswithmembers class * {
+    @com.squareup.picasso.** *;
+}
+-keepclassmembers class * {
+    @com.squareup.picasso.** *;
+}

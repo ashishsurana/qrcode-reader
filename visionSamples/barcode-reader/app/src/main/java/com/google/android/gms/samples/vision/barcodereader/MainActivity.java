@@ -24,6 +24,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.flurry.android.FlurryAgent;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
 
@@ -50,8 +51,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
         statusMessage = (TextView)findViewById(R.id.status_message);
         barcodeValue = (TextView)findViewById(R.id.barcode_value);
 
-
         findViewById(R.id.read_barcode).setOnClickListener(this);
+        //Flurry Analtics
+        new FlurryAgent.Builder()
+                .withLogEnabled(false)
+                .build(this, "H2Y3X6DK7YBGD4MBJHGV");
+
     }
 
     /**

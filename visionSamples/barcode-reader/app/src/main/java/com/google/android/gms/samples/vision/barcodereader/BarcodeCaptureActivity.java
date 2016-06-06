@@ -20,17 +20,12 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.hardware.Camera;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -55,9 +50,7 @@ import com.google.android.gms.samples.vision.barcodereader.ui.camera.GraphicOver
 import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
-import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 import java.io.IOException;
 
@@ -91,10 +84,10 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
     private ScaleGestureDetector scaleGestureDetector;
     private GestureDetector gestureDetector;
 
-    @Bind(R.id.imageView2)
-    ImageView imageView ;
+    @Bind(R.id.imageView_picasso)
+    ImageView picassoImage;
 
-//    PicassoTask picassoTask;
+
     /**
      * Initializes the UI and creates the detector pipeline.
      */
@@ -128,7 +121,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
                 .show();
         ButterKnife.bind(this);
         Picasso.with(this).load("http://ashishsurana.in/assets/git.png")
-                .into(imageView);
+                .into(picassoImage);
     }
 
     /**
@@ -221,7 +214,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
         // at long distances.
         CameraSource.Builder builder = new CameraSource.Builder(getApplicationContext(), barcodeDetector)
                 .setFacing(CameraSource.CAMERA_FACING_BACK)
-                .setRequestedPreviewSize(1600, 1024)
+                .setRequestedPreviewSize(1600, 1524)
                 .setRequestedFps(15.0f);
 
         // make sure that auto focus is an available option
@@ -439,49 +432,5 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
         }
     }
 
-    private class ImageTask extends AsyncTask<Void, Void, Void>
-    {
-        ProgressDialog pdLoading = new ProgressDialog(BarcodeCaptureActivity.this);
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            //this method will be running on UI thread
-            pdLoading.setMessage("\tLoading...");
-            pdLoading.show();
-        }
-        @Override
-        protected Void doInBackground(Void... params) {
-
-
-            Picasso.with(BarcodeCaptureActivity.this).load("http://ashishsurana.in/assets/git.png").
-                    fit().into(imageView,
-                    new Callback() {@
-                            Override
-                    public void onSuccess() {}@
-                            Override
-                    public void onError() {}
-                    });
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            super.onPostExecute(result);
-
-            //this method will be running on UI thread
-
-            pdLoading.dismiss();
-        }
-
-    }
-    private class PicassoTask extends AsyncTask<Void,Void,Void>{
-        @Override
-        protected Void doInBackground(Void... params) {
-            Picasso.with(BarcodeCaptureActivity.this).load("http://ashishsurana.in/assets/finalise_main_screen.jpg").into(imageView);
-            return null;
-        }
-    }
 }
 
